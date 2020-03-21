@@ -1,0 +1,28 @@
+{
+  "name": "covid19",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_OPTIONS=--max-old-space-size=4096 canon-build",
+    "dev": "canon-dev",
+    "locales": "canon-locales",
+    "release": "canon-release",
+    "setup": "canon-setup",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Datawheel/covid19.git"
+  },
+  "author": "Carlos Navarrete - Annabella Zapata",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Datawheel/covid19/issues"
+  },
+  "homepage": "https://github.com/Datawheel/covid19#readme",
+  "dependencies": {
+    "@datawheel/canon-core": "^0.18.7"
+  }
+}
