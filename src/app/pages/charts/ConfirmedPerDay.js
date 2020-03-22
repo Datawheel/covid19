@@ -134,7 +134,11 @@ var ConfirmedPerDay = /*#__PURE__*/function (_React$Component) {
           }
         }))),
         paragraph: ["Este gráfico muestra los casos confirmados por región desde que se confirmaron 10 contagiados. Ello pues la propagación de COVID-19 no comenzó al mismo tiempo en todas las regiones y, por ende, es importante   analizar si el comportamiento del virus sigue tendencias similares desde el día que se confirman los primeros casos en cada región.", "La curva en rojo muestra el comportamiento del virus a nivel nacional.", "Mueva el slider para ajustar este umbral."],
-        source: source,
+        source: /*#__PURE__*/_react["default"].createElement("p", {
+          className: "source"
+        }, "Datos entregados por el Ministerio de Salud, y almacenados diariamente por Ignacio Toledo en ", /*#__PURE__*/_react["default"].createElement("a", {
+          href: source
+        }, source)),
         title: "TOTAL CASOS DETECTADOS DESDE LOS ".concat(this.state.valueReleased, " CONFIRMADOS")
       }, /*#__PURE__*/_react["default"].createElement(_d3plusReact.LinePlot, {
         config: {

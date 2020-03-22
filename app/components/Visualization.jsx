@@ -21,10 +21,7 @@ export default class Visualization extends React.Component {
           {paragraph.map((d, i) =>
             <p key={i}>{d}</p>
           )}
-          <p className="source">
-            <b>Fuente:</b> Datos entregados por el Ministerio de Salud, y almacenados
-            diariamente por Ignacio Toledo en <a href={source}>{source}</a>
-          </p>
+          {source}
         </div>
         <div className="column">{children}</div>
       </div>

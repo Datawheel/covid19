@@ -68,11 +68,7 @@ var Visualization = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/_react["default"].createElement("p", {
           key: i
         }, d);
-      }), /*#__PURE__*/_react["default"].createElement("p", {
-        className: "source"
-      }, /*#__PURE__*/_react["default"].createElement("b", null, "Fuente:"), " Datos entregados por el Ministerio de Salud, y almacenados diariamente por Ignacio Toledo en ", /*#__PURE__*/_react["default"].createElement("a", {
-        href: source
-      }, source))), /*#__PURE__*/_react["default"].createElement("div", {
+      }), source), /*#__PURE__*/_react["default"].createElement("div", {
         className: "column"
       }, children));
     }

@@ -143,7 +143,13 @@ var InternationalComparison = /*#__PURE__*/function (_React$Component) {
           }
         }),
         paragraph: ["Una manera de tomar medidas frente al COVID-19 es analizar el comportamiento del virus en otros países, estudiar las medidas que estos han implementados y analizar sus efectos en las respectivas curvas de contagiados. Para ello, esta visualización compara el número de contagiados cada 100.000 habitantes en Chile con otros países que han presentado un alto número de personas contagiadas.", "Cambiamos todos los puntos de partida al día en que cada lugar informó un total de 100 casos o más."],
-        source: source,
+        source: /*#__PURE__*/_react["default"].createElement("p", {
+          className: "source"
+        }, "Datos entregados por el Ministerio de Salud, y almacenados diariamente por Ignacio Toledo en ", /*#__PURE__*/_react["default"].createElement("a", {
+          href: source
+        }, source), ". Datos internaciones obtenidos de ", /*#__PURE__*/_react["default"].createElement("a", {
+          href: "https://covid19api.com/"
+        }, "https://covid19api.com/"), "."),
         title: "Comparaci\xF3n Internacional"
       }, /*#__PURE__*/_react["default"].createElement(_d3plusReact.LinePlot, {
         config: {

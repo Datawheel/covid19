@@ -56,7 +56,10 @@ export default class ConfirmedPerDay extends React.Component {
           "La curva en rojo muestra el comportamiento del virus a nivel nacional.",
           "Mueva el slider para ajustar este umbral."
         ]}
-        source={source}
+        source={<p className="source">
+          Datos entregados por el Ministerio de Salud, y almacenados
+        diariamente por Ignacio Toledo en <a href={source}>{source}</a>
+        </p>}
         title={`TOTAL CASOS DETECTADOS DESDE LOS ${this.state.valueReleased} CONFIRMADOS`}
       >
         <LinePlot
