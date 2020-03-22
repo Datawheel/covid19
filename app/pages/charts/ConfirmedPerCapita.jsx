@@ -23,8 +23,8 @@ export default class ConfirmedPerCapita extends React.Component {
           />
         }
         paragraph={[
-          "Esta visualización normaliza el número de casos confirmados de COVID-19 por cada 100.000 habitantes de una región. Da una idea de la \"densidad\" de las infecciones por COVID-19 en cada región.",
-          "La curva en rojo  entrega esta información a nivel nacional."
+          "Esta visualización normaliza el número de casos confirmados de COVID-19 por cada 100.000 habitantes de una región, informando sobre la \"densidad\" de las infecciones por COVID-19 por región.",
+          "La curva en rojo entrega esta información a nivel nacional."
         ]}
         source={source}
         title="TOTAL CASOS CONFIRMADOS CADA 100.000 HABITANTES POR FECHA"
