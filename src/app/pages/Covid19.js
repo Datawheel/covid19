@@ -113,7 +113,7 @@ var Covid19 = /*#__PURE__*/function (_React$Component) {
           data = _this$state.data,
           updated = _this$state.updated;
       return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "page"
+        className: "page covid19"
       }, /*#__PURE__*/_react["default"].createElement(_Nav["default"], null), /*#__PURE__*/_react["default"].createElement("div", {
         className: "hero"
       }, /*#__PURE__*/_react["default"].createElement("h1", {

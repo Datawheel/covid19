@@ -39,7 +39,7 @@ export default class Covid19 extends React.Component {
   render() {
     const {data, updated} = this.state;
     return (
-      <div className="page">
+      <div className="page covid19">
         <Nav />
         <div className="hero">
           <h1 className="title">COVID-19 EN CHILE</h1>
