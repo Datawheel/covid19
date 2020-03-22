@@ -1,17 +1,15 @@
 import React from "react";
-import Visualization from "../../../components/Visualization";
-import ButtonGroupV2 from "../../../components/ButtonGroupV2";
+import Visualization from "../../components/Visualization";
+import ButtonGroupV2 from "../../components/ButtonGroupV2";
 import {LinePlot} from "d3plus-react";
 
-export default class ConfirmedPerCapita extends React.Component {
+export default class ConfirmedCases extends React.Component {
   state = {
     scale: "Lineal"
   };
   render() {
     const {scale} = this.state;
-    const {data, dataChile, source} = this.props;
-    const values = data.map(d => d.total_cada_100mil);
-    values.sort((a, b) => a - b);
+    const {data, source} = this.props;
 
     return (
       <Visualization
@@ -23,15 +21,14 @@ export default class ConfirmedPerCapita extends React.Component {
           />
         }
         paragraph={[
-          "Esta visualización normaliza el número de casos confirmados de COVID-19 por cada 100.000 habitantes de una región. Da una idea de la \"densidad\" de las infecciones por COVID-19 en cada región.",
-          "La curva en rojo  entrega esta información a nivel nacional."
+          "Esta visualización muestra el número de casos confirmados de COVID-19 en cada región de Chile desde que se confirmó el primer caso en el país. Es el más simple de todos los gráficos, pues no controla por el número de habitantes o el momento en que comenzó la epidemia en cada región."
         ]}
         source={source}
-        title="TOTAL CASOS CONFIRMADOS CADA 100.000 HABITANTES POR FECHA"
+        title="TOTAL CASOS CONFIRMADOS POR FECHA"
       >
         <LinePlot
           config={{
-            data: [...data, ...dataChile],
+            data,
             x: "fecha",
             discrete: "x",
             groupBy: ["region"],
@@ -48,14 +45,12 @@ export default class ConfirmedPerCapita extends React.Component {
               },
               domain: [new Date("2020/03/03"), this.props.latest]
             },
-            y: "total_cada_100mil",
+            y: "casos_acum",
             yConfig: {
-              // domain: [min, max],
               scale: scale === "Lineal" ? "linear" : "log",
-              title: `Casos Confirmados cada 100.000\n(${scale})`
+              title: `Casos Confirmados\n(${scale})`
             }
           }}
-          dataFormat={resp => resp.filter(d => d.total_cada_100mil > 0)}
         />
       </Visualization>
     );

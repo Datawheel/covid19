@@ -7,9 +7,11 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Visualization = _interopRequireDefault(require("../../../components/Visualization"));
+var _Visualization = _interopRequireDefault(require("../../components/Visualization"));
 
-var _ButtonGroupV = _interopRequireDefault(require("../../../components/ButtonGroupV2"));
+var _ButtonGroupV = _interopRequireDefault(require("../../components/ButtonGroupV2"));
+
+var _core = require("@blueprintjs/core");
 
 var _d3plusReact = require("d3plus-react");
 
@@ -68,7 +70,9 @@ var ConfirmedPerDay = /*#__PURE__*/function (_React$Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      scale: "Lineal"
+      scale: "Lineal",
+      value: 10,
+      valueReleased: 10
     });
 
     return _this;
@@ -84,8 +88,29 @@ var ConfirmedPerDay = /*#__PURE__*/function (_React$Component) {
           data = _this$props.data,
           dataChile = _this$props.dataChile,
           source = _this$props.source;
+      var r = [].concat(_toConsumableArray(data), _toConsumableArray(dataChile));
+      r.sort(function (a, b) {
+        return a.region_id - b.region_id || a.fecha > b.fecha;
+      });
+      var days = 0;
+      var comparison = "";
+      r.forEach(function (d) {
+        if (d.region !== comparison) {
+          comparison = d.region;
+          days = 0;
+        }
+
+        if (d.casos_acum >= _this2.state.valueReleased) {
+          days += 1;
+        }
+
+        d.days = days;
+      });
+      r = r.filter(function (d) {
+        return d.days > 0;
+      });
       return /*#__PURE__*/_react["default"].createElement(_Visualization["default"], {
-        buttons: /*#__PURE__*/_react["default"].createElement(_ButtonGroupV["default"], {
+        buttons: /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_ButtonGroupV["default"], {
           items: ["Lineal", "Logarítmica"],
           selected: scale,
           callback: function callback(scale) {
@@ -93,13 +118,27 @@ var ConfirmedPerDay = /*#__PURE__*/function (_React$Component) {
               scale: scale
             });
           }
-        }),
-        paragraph: ["Dado que la propagación de COVID-19 no comenzó al mismo tiempo en todas las regiones, es importante analizar si el comportamiento del virus sigue tendencias similares desde el día que se confirma el primer caso en cada región.", "La curva en rojo muestra el comportamiento del virus a nivel nacional."],
+        }), /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_core.Slider, {
+          labelStepSize: 10,
+          max: 100,
+          value: this.state.value,
+          onRelease: function onRelease(valueReleased) {
+            return _this2.setState({
+              valueReleased: valueReleased
+            });
+          },
+          onChange: function onChange(value) {
+            return _this2.setState({
+              value: value
+            });
+          }
+        }))),
+        paragraph: ["Dado que la propagación de COVID-19 no comenzó al mismo tiempo en todas las regiones, es importante analizar si el comportamiento del virus sigue tendencias similares desde el día que se confirman los primeros casos en cada región.", "La curva en rojo muestra el comportamiento del virus a nivel nacional.", "Mueva el slider para ajustar este umbral."],
         source: source,
-        title: "TOTAL CASOS CONFIRMADOS CADA 100.000 HABITANTES POR D\xCDA DE CONTAGIO"
+        title: "TOTAL CASOS DETECTADOS DESDE LOS ".concat(this.state.valueReleased, " CONFIRMADOS")
       }, /*#__PURE__*/_react["default"].createElement(_d3plusReact.LinePlot, {
         config: {
-          data: [].concat(_toConsumableArray(data), _toConsumableArray(dataChile)),
+          data: r,
           x: "days",
           discrete: "x",
           groupBy: ["region"],
@@ -109,16 +148,11 @@ var ConfirmedPerDay = /*#__PURE__*/function (_React$Component) {
               return d % 2 ? "D\xEDa ".concat(d) : "";
             }
           },
-          y: "total_cada_100mil",
+          y: "casos_acum",
           yConfig: {
             scale: scale === "Lineal" ? "linear" : "log",
             title: "Casos Confirmados\n(".concat(scale, ")")
           }
-        },
-        dataFormat: function dataFormat(resp) {
-          return resp.filter(function (d) {
-            return d.days > 0;
-          });
         }
       }));
     }

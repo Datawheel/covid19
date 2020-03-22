@@ -7,9 +7,9 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Visualization = _interopRequireDefault(require("../../../components/Visualization"));
+var _Visualization = _interopRequireDefault(require("../../components/Visualization"));
 
-var _ButtonGroupV = _interopRequireDefault(require("../../../components/ButtonGroupV2"));
+var _ButtonGroupV = _interopRequireDefault(require("../../components/ButtonGroupV2"));
 
 var _d3plusReact = require("d3plus-react");
 
@@ -83,15 +83,17 @@ var InternationalComparison = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios["default"].all([_axios["default"].get("/api/coronavirus"), _axios["default"].get("/data_country.json")]).then(_axios["default"].spread(function () {
+      _axios["default"].all([_axios["default"].get("/api/coronavirus"), _axios["default"].get("/data_country.json"), _axios["default"].get("/data.json")]).then(_axios["default"].spread(function () {
         for (var _len2 = arguments.length, resp = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
           resp[_key2] = arguments[_key2];
         }
 
         var dataApi = resp[0].data;
         var dataChile = resp[1].data;
+        var dataRegion = resp[2].data.data;
         var countries = dataApi.countries;
         var data = dataChile.data;
+        data = [].concat(_toConsumableArray(data), _toConsumableArray(dataRegion));
         var days = 0;
         var comparison = "";
         data.forEach(function (d) {
@@ -100,7 +102,7 @@ var InternationalComparison = /*#__PURE__*/function (_React$Component) {
             days = 0;
           }
 
-          if (d.casos_acum >= 50) {
+          if (d.casos_acum >= 100) {
             days += 1;
           }
 
@@ -140,7 +142,7 @@ var InternationalComparison = /*#__PURE__*/function (_React$Component) {
             });
           }
         }),
-        paragraph: ["Una manera de tomar medidas frente al COVID-19 es analizar el comportamiento del virus en otros países, estudiar las medidas que estos han implementados y analizar sus efectos en las respectivas curvas de contagiados. Para ello, esta visualización compara el número de contagiados cada 100.000 habitantes en Chile con otros países que han presentado un alto número de personas contagiadas."],
+        paragraph: ["Una manera de tomar medidas frente al COVID-19 es analizar el comportamiento del virus en otros países, estudiar las medidas que estos han implementados y analizar sus efectos en las respectivas curvas de contagiados. Para ello, esta visualización compara el número de contagiados cada 100.000 habitantes en Chile con otros países que han presentado un alto número de personas contagiadas.", "Cambiamos todos los puntos de partida al día en que cada lugar informó un total de 100 casos o más."],
         source: source,
         title: "Comparaci\xF3n Internacional"
       }, /*#__PURE__*/_react["default"].createElement(_d3plusReact.LinePlot, {
