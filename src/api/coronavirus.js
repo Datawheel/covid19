@@ -20,10 +20,8 @@ module.exports = function(app) {
 
   app.get("/api/coronavirus", async(req, res) => {
 
-    let summary = await axios.get("https://api.covid19api.com/summary")
+    const summary = await axios.get("https://api.covid19api.com/summary")
       .then(resp => resp.data);
-
-    if (typeof summary !== "object") summary = JSON.parse(summary);
 
     const timestamp = summary.Date;
 
