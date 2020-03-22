@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Section = _interopRequireDefault(require("components/Section"));
+var _Section = _interopRequireDefault(require("../components/Section"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -19,7 +19,7 @@ var _ConfirmedPerDay = _interopRequireDefault(require("./charts/ConfirmedPerDay"
 
 var _InternationalComparison = _interopRequireDefault(require("./charts/InternationalComparison"));
 
-var _Nav = _interopRequireDefault(require("components/Nav"));
+var _Nav = _interopRequireDefault(require("../components/Nav"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 

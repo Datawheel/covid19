@@ -1,6 +1,6 @@
 import React from "react";
-import Visualization from "components/Visualization";
-import ButtonGroupV2 from "components/ButtonGroupV2";
+import Visualization from "../../components/Visualization";
+import ButtonGroupV2 from "../../components/ButtonGroupV2";
 import {LinePlot} from "d3plus-react";
 import axios from "axios";
 

@@ -111,7 +111,7 @@ output2 = {
 }
 
 import simplejson as json
-with open("covid19_nacional.json", "w") as outfile:
+with open("../static/data_country.json", "w") as outfile:
     json.dump(output2, outfile, ignore_nan=True)
 
 
@@ -135,6 +135,6 @@ output1 = {
 }
 
 import simplejson as json
-with open("dias_covid19.json", "w") as outfile:
+with open("../static/data.json", "w") as outfile:
     json.dump(output1, outfile, ignore_nan=True)
 
