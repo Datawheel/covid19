@@ -71,8 +71,7 @@ dates = pd.Series(dates).astype(str)
 
 data = []
 for date in dates: 
-    
-    url = "https://raw.githubusercontent.com/itoledor/coronavirus/master/data/covid19_chile_{}.csv".format(date)
+    url = "https://storage.googleapis.com/covid19chile/Chile/covid19_chile_{}.csv".format(date)
     try:
         df = pd.read_csv(url, sep=";")
 
@@ -95,10 +94,13 @@ for date in dates:
 
 data = pd.concat(data, sort=False)
 
+update = data.fecha.max()
+update = pd.to_datetime(update)
+
 output = {
     "data": data.to_dict(orient="records"),
     "source": "https://github.com/itoledor/coronavirus",
-    "updated": pd.datetime.now().strftime("%d/%m/%Y %I:%M:%S")
+    "updated": update.strftime("%d-%m-%Y")
 }
 
 import simplejson as json
@@ -106,7 +108,7 @@ with open("data_covid19.json", "w") as outfile:
     json.dump(output, outfile, ignore_nan=True)
 
 
-# In[15]:
+# In[6]:
 
 
 data2 = data.copy()
@@ -129,7 +131,7 @@ data2["days"] = days1
 output2 = {
     "data": data2.to_dict(orient="records"),
     "source": "https://github.com/itoledor/coronavirus",
-    "updated": pd.datetime.now().strftime("%d/%m/%Y %I:%M:%S")
+    "updated": update.strftime("%d-%m-%Y")
 }
 
 import simplejson as json
@@ -137,7 +139,7 @@ with open("covid19_nacional.json", "w") as outfile:
     json.dump(output2, outfile, ignore_nan=True)
 
 
-# In[10]:
+# In[7]:
 
 
 days =[]
@@ -156,10 +158,16 @@ data1["days"] = days
 output1 = {
     "data": data1.to_dict(orient="records"),
     "source": "https://github.com/itoledor/coronavirus",
-    "updated": pd.datetime.now().strftime("%d/%m/%Y %I:%M:%S")
+    "updated": update.strftime("%d-%m-%Y")
 }
 
 import simplejson as json
 with open("dias_covid19.json", "w") as outfile:
     json.dump(output1, outfile, ignore_nan=True)
+
+
+# In[ ]:
+
+
+
 
