@@ -19,8 +19,6 @@ var _ConfirmedPerDay = _interopRequireDefault(require("./charts/ConfirmedPerDay"
 
 var _InternationalComparison = _interopRequireDefault(require("./charts/InternationalComparison"));
 
-var _Nav = _interopRequireDefault(require("../components/Nav"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -109,20 +107,9 @@ var Covid19 = /*#__PURE__*/function (_React$Component) {
   _createClass(Covid19, [{
     key: "render",
     value: function render() {
-      var _this$state = this.state,
-          data = _this$state.data,
-          updated = _this$state.updated;
       return /*#__PURE__*/_react["default"].createElement("div", {
         className: "page covid19"
-      }, /*#__PURE__*/_react["default"].createElement(_Nav["default"], null), /*#__PURE__*/_react["default"].createElement("div", {
-        className: "hero"
-      }, /*#__PURE__*/_react["default"].createElement("h1", {
-        className: "title"
-      }, "COVID-19 EN CHILE"), /*#__PURE__*/_react["default"].createElement("h5", {
-        className: "updated"
-      }, "\xDAltima actualizaci\xF3n: ", updated), /*#__PURE__*/_react["default"].createElement("div", {
-        className: "description"
-      }, /*#__PURE__*/_react["default"].createElement("p", null, "\xBFC\xF3mo se est\xE1 propagando el COVID-19 (tambi\xE9n conocido como Coronavirus) en las diferentes regiones de Chile? \xBFQu\xE9 tan r\xE1pido est\xE1 creciendo? \xBFLa expansi\xF3n del virus a nivel nacional presenta un comportamiento similar a otros pa\xEDses afectados?"), /*#__PURE__*/_react["default"].createElement("p", null, "En Chilecracia, nuestra misi\xF3n es informar a la ciudadan\xEDa sobre diferentes temas de inter\xE9s nacional. La preocupaci\xF3n existente hoy en d\xEDa por el aumento de casos de COVID-19 en nuestro pa\xEDs nos ha motivado ha visualizar y distribuir datos que permitan entender y analizar el comportamiento del virus en Chile."))), /*#__PURE__*/_react["default"].createElement(_Section["default"], {
+      }, /*#__PURE__*/_react["default"].createElement(_Section["default"], {
         title: "Casos por Regi\xF3n"
       }, /*#__PURE__*/_react["default"].createElement(_ConfirmedCases["default"], this.state), /*#__PURE__*/_react["default"].createElement(_ConfirmedPerCapita["default"], this.state), /*#__PURE__*/_react["default"].createElement(_ConfirmedPerDay["default"], this.state), /*#__PURE__*/_react["default"].createElement(_InternationalComparison["default"], this.state)), /*#__PURE__*/_react["default"].createElement(_Section["default"], {
         title: "PREGUNTAS FRECUENTES"

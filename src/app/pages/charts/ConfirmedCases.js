@@ -81,7 +81,7 @@ var ConfirmedCases = /*#__PURE__*/function (_React$Component) {
             });
           }
         }),
-        paragraph: ["Esta visualización muestra el número de casos confirmados de COVID-19 en cada región de Chile desde que se confirmó el primer caso en el país. Es el más simple de todos los gráficos, pues no controla por el número de habitantes o el momento en que comenzó la epidemia en cada región."],
+        paragraph: ["Esta visualización muestra el número de casos confirmados de COVID-19 en cada región de Chile desde que se confirmó el primer caso en el país. Es el gráfico más simple pues no incluye variables como el número de habitantes o fecha de primer contagiado en cada región."],
         source: source,
         title: "TOTAL CASOS CONFIRMADOS POR FECHA"
       }, /*#__PURE__*/_react["default"].createElement(_d3plusReact.LinePlot, {
