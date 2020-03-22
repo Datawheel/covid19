@@ -1,5 +1,5 @@
 {
-  "name": "covid19",
+  "name": "@datawheel/covid19",
   "version": "0.1.0",
   "description": "",
   "main": "src/index.js",
