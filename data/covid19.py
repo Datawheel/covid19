@@ -1,6 +1,16 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 import pandas as pd
 import numpy as np
 import datetime as dt
+
+
+# In[2]:
+
 
 regions_id = {
             "Arica y Parinacota":15,
@@ -20,6 +30,9 @@ regions_id = {
             "Aysén":11,
             "Magallanes":12
             }
+
+
+# In[3]:
 
 
 regions_pob = {
@@ -42,6 +55,9 @@ regions_pob = {
             }
 
 
+# In[4]:
+
+
 today = dt.date.today()
 start_day = dt.date(2020, 3, 3)
 diff = today - start_day
@@ -50,16 +66,24 @@ dates = pd.date_range("2020-03-03", periods=days+1, freq="D")
 dates = pd.Series(dates).astype(str)
 
 
-data = []
-for date in dates:
-    url = "https://storage.googleapis.com/covid19chile/Chile/covid19_chile_{}.csv".format(date)
-    try:
-        df = pd.read_csv(url, sep=";")
+# In[5]:
 
-        df["region_id"] = df["region"].replace(regions_id)
-        df["region_pob"] = df["region"].replace(regions_pob)
-        df["fecha"] = df["fecha"].str.replace("-", "/")
+
+data = []
+for date in dates: 
+    
+    url = "https://storage.googleapis.com/covid19chile/Chile/covid19_chile_{}.csv?h=h".format(date)
+    try:
+        try:
+            df = pd.read_csv(url, sep=";", encoding="utf-8")
+
+        except:
+            df = pd.read_csv(url, sep=";", encoding="latin-1")
+
         df = df[df["region"]!="Total"]
+        df["region_id"] = df["region"].replace(regions_id)
+        df["region_pob"] = df["region"].replace(regions_pob).astype(int)  
+        df["fecha"] = df["fecha"].str.replace("-", "/")
         df = df.rename(columns={"casos_nuevos":"confirmados", "casos_totales":"casos_acum"})
         df["total_cada_100mil"] = (df["casos_acum"]/df["region_pob"])*100000
         df = df.drop(columns={"casos_recuperados", "region_pob"})
@@ -70,10 +94,21 @@ for date in dates:
             df.loc[df["region"] == "Maule", ["confirmados"]] = 1
 
         data.append(df)
+        
     except:
         pass
 
 data = pd.concat(data, sort=False)
+
+
+# In[6]:
+
+
+data.tail()
+
+
+# In[8]:
+
 
 update = data.fecha.max()
 update = pd.to_datetime(update)
@@ -87,6 +122,9 @@ output = {
 import simplejson as json
 with open("data_covid19.json", "w") as outfile:
     json.dump(output, outfile, ignore_nan=True)
+
+
+# In[9]:
 
 
 data2 = data.copy()
@@ -103,7 +141,7 @@ days1 =[]
 for i in range (1,len(data2)+1):
     days_ = i
     days1.append(days_)
-
+    
 data2["days"] = days1
 
 output2 = {
@@ -113,8 +151,11 @@ output2 = {
 }
 
 import simplejson as json
-with open("../static/data_country.json", "w") as outfile:
+with open("covid19_nacional.json", "w") as outfile:
     json.dump(output2, outfile, ignore_nan=True)
+
+
+# In[10]:
 
 
 days =[]
@@ -123,9 +164,9 @@ for a, df_a in data.groupby("region"):
     for row in df_a.itertuples():
         if row.casos_acum!=0:
             default = default + 1
-
+            
         days.append(default)
-
+        
 data1 = data.sort_values(by=['region', 'fecha'])
 
 data1["days"] = days
@@ -137,7 +178,7 @@ output1 = {
 }
 
 import simplejson as json
-with open("../static/data.json", "w") as outfile:
+with open("dias_covid19.json", "w") as outfile:
     json.dump(output1, outfile, ignore_nan=True)
 
 
