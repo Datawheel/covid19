@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_OPTIONS=--max-old-space-size=4096 canon-build",
+    "build": "NODE_OPTIONS=--max-old-space-size=8192 canon-build",
+    "compile": "rm -rf src/ && mkdir src && cp -a api/ src/api/ && npx babel app/ --out-dir src/app --copy-files && cp app/index.js src",
     "dev": "canon-dev",
     "locales": "canon-locales",
     "release": "canon-release",

@@ -9,7 +9,7 @@ export default class ConfirmedPerDay extends React.Component {
   };
   render() {
     const {scale} = this.state;
-    const {data, source} = this.props;
+    const {data, dataChile, source} = this.props;
 
     return (
       <Visualization
@@ -22,14 +22,14 @@ export default class ConfirmedPerDay extends React.Component {
         }
         paragraph={[
           "Dado que la propagación de COVID-19 no comenzó al mismo tiempo en todas las regiones, es importante analizar si el comportamiento del virus sigue tendencias similares desde el día que se confirma el primer caso en cada región.",
-          "La curva en gris muestra el comportamiento del virus a nivel nacional."
+          "La curva en rojo muestra el comportamiento del virus a nivel nacional."
         ]}
         source={source}
         title="TOTAL CASOS CONFIRMADOS CADA 100.000 HABITANTES POR DÍA DE CONTAGIO"
       >
         <LinePlot
           config={{
-            data,
+            data: [...data, ...dataChile],
             x: "days",
             discrete: "x",
             groupBy: ["region"],
@@ -37,7 +37,7 @@ export default class ConfirmedPerDay extends React.Component {
             xConfig: {
               tickFormat: d => d % 2 ? `Día ${d}` : ""
             },
-            y: "casos_acum",
+            y: "total_cada_100mil",
             yConfig: {
               scale: scale === "Lineal" ? "linear" : "log",
               title: `Casos Confirmados\n(${scale})`

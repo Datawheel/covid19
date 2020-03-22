@@ -10,7 +10,7 @@ export default class ConfirmedCases extends React.Component {
   render() {
     const {scale} = this.state;
     const {data, source} = this.props;
-    console.log(data);
+
     return (
       <Visualization
         buttons={
@@ -43,7 +43,7 @@ export default class ConfirmedCases extends React.Component {
                 const day = date.getDate();
                 return date <= new Date() ? `${months[month]} ${day}` : "";
               },
-              domain: [new Date("2020/03/03"), new Date("2020/03/23")]
+              domain: [new Date("2020/03/03"), this.props.latest]
             },
             y: "casos_acum",
             yConfig: {

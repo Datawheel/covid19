@@ -48,7 +48,7 @@ export default class InternationalComparison extends React.Component {
   render() {
     const {scale} = this.state;
     const {data, source} = this.props;
-    console.log(this.state.domain);
+
     return (
       <Visualization
         buttons={
