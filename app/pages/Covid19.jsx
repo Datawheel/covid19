@@ -81,7 +81,7 @@ export default class Covid19 extends React.Component {
             </p>
             <p>
               Después de 10 pasos, el crecimiento lineal (+10) nos lleva a 100.
-              El crecimiento exponencial (x2) nos lleva a (1,024). Después de 20
+              El crecimiento exponencial (x2) nos lleva a (1.024). Después de 20
               pasos, el crecimiento lineal solo nos lleva a 200 y el crecimiento
               exponencial supera el millón.
             </p>
