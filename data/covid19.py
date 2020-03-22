@@ -1,16 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import numpy as np
 import datetime as dt
-
-
-# In[2]:
-
 
 regions_id = {
             "Arica y Parinacota":15,
@@ -30,9 +20,6 @@ regions_id = {
             "Aysén":11,
             "Magallanes":12
             }
-
-
-# In[3]:
 
 
 regions_pob = {
@@ -55,9 +42,6 @@ regions_pob = {
             }
 
 
-# In[4]:
-
-
 today = dt.date.today()
 start_day = dt.date(2020, 3, 3)
 diff = today - start_day
@@ -66,18 +50,15 @@ dates = pd.date_range("2020-03-03", periods=days+1, freq="D")
 dates = pd.Series(dates).astype(str)
 
 
-# In[5]:
-
-
 data = []
-for date in dates: 
-    
+for date in dates:
+
     url = "https://raw.githubusercontent.com/itoledor/coronavirus/master/data/covid19_chile_{}.csv".format(date)
     try:
         df = pd.read_csv(url, sep=";")
 
         df["region_id"] = df["region"].replace(regions_id)
-        df["region_pob"] = df["region"].replace(regions_pob)  
+        df["region_pob"] = df["region"].replace(regions_pob)
         df["fecha"] = df["fecha"].str.replace("-", "/")
         df = df[df["region"]!="Total"]
         df = df.rename(columns={"casos_nuevos":"confirmados", "casos_totales":"casos_acum"})
@@ -106,9 +87,6 @@ with open("data_covid19.json", "w") as outfile:
     json.dump(output, outfile, ignore_nan=True)
 
 
-# In[15]:
-
-
 data2 = data.copy()
 data2 = data2.groupby("fecha").sum().reset_index()
 data2["region"] = "Chile"
@@ -123,7 +101,7 @@ days1 =[]
 for i in range (1,len(data2)+1):
     days_ = i
     days1.append(days_)
-    
+
 data2["days"] = days1
 
 output2 = {
@@ -137,18 +115,15 @@ with open("covid19_nacional.json", "w") as outfile:
     json.dump(output2, outfile, ignore_nan=True)
 
 
-# In[10]:
-
-
 days =[]
 for a, df_a in data.groupby("region"):
     default = 0
     for row in df_a.itertuples():
         if row.casos_acum!=0:
             default = default + 1
-            
+
         days.append(default)
-        
+
 data1 = data.sort_values(by=['region', 'fecha'])
 
 data1["days"] = days

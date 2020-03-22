@@ -7,9 +7,9 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Visualization = _interopRequireDefault(require("../../../components/Visualization"));
+var _Visualization = _interopRequireDefault(require("components/Visualization"));
 
-var _ButtonGroupV = _interopRequireDefault(require("../../../components/ButtonGroupV2"));
+var _ButtonGroupV = _interopRequireDefault(require("components/ButtonGroupV2"));
 
 var _d3plusReact = require("d3plus-react");
 
