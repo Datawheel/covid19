@@ -6,7 +6,7 @@ body {
   padding: 0;
   background: var(--covid-background-1);
 }
-#covid19 {
+.covid19 {
   & .nav {
     background-color: var(--covid-primary);
     font-family: "Fira Sans", sans-serif;

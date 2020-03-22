@@ -14,12 +14,16 @@ export default class InternationalComparison extends React.Component {
   componentDidMount() {
     axios.all([
       axios.get("/api/coronavirus"),
-      axios.get("/data_country.json")
+      axios.get("/data_country.json"),
+      axios.get("/data.json")
     ]).then(axios.spread((...resp) => {
       const dataApi = resp[0].data;
       const dataChile = resp[1].data;
+      const dataRegion = resp[2].data.data;
       const {countries} = dataApi;
-      const {data} = dataChile;
+      let {data} = dataChile;
+      data = [...data, ...dataRegion];
+
       let days = 0;
       let comparison = "";
       data.forEach(d => {
@@ -27,7 +31,7 @@ export default class InternationalComparison extends React.Component {
           comparison = d.region;
           days = 0;
         }
-        if (d.casos_acum >= 50) {
+        if (d.casos_acum >= 100) {
           days += 1;
         }
         d.Days = days;
@@ -59,7 +63,8 @@ export default class InternationalComparison extends React.Component {
           />
         }
         paragraph={[
-          "Una manera de tomar medidas frente al COVID-19 es analizar el comportamiento del virus en otros países, estudiar las medidas que estos han implementados y analizar sus efectos en las respectivas curvas de contagiados. Para ello, esta visualización compara el número de contagiados cada 100.000 habitantes en Chile con otros países que han presentado un alto número de personas contagiadas."
+          "Una manera de tomar medidas frente al COVID-19 es analizar el comportamiento del virus en otros países, estudiar las medidas que estos han implementados y analizar sus efectos en las respectivas curvas de contagiados. Para ello, esta visualización compara el número de contagiados cada 100.000 habitantes en Chile con otros países que han presentado un alto número de personas contagiadas.",
+          "Cambiamos todos los puntos de partida al día en que cada lugar informó un total de 100 casos o más."
         ]}
         source={source}
         title="Comparación Internacional"
