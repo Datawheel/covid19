@@ -5,7 +5,7 @@ import ConfirmedCases from "./charts/ConfirmedCases";
 import ConfirmedPerCapita from "./charts/ConfirmedPerCapita";
 import ConfirmedPerDay from "./charts/ConfirmedPerDay";
 import InternationalComparison from "./charts/InternationalComparison";
-import Nav from "../../components/Nav";
+import Nav from "components/Nav";
 
 export default class Covid19 extends React.Component {
   state = {

@@ -19,7 +19,7 @@ var _ConfirmedPerDay = _interopRequireDefault(require("./charts/ConfirmedPerDay"
 
 var _InternationalComparison = _interopRequireDefault(require("./charts/InternationalComparison"));
 
-var _Nav = _interopRequireDefault(require("../../components/Nav"));
+var _Nav = _interopRequireDefault(require("components/Nav"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
