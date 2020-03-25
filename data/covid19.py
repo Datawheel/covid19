@@ -31,10 +31,6 @@ regions_id = {
             "Magallanes":12
             }
 
-
-# In[3]:
-
-
 regions_pob = {
             "Arica y Parinacota":252110,
             "Tarapacá":382773,
@@ -54,10 +50,6 @@ regions_pob = {
             "Magallanes":178362
             }
 
-
-# In[4]:
-
-
 today = dt.date.today()
 start_day = dt.date(2020, 3, 3)
 diff = today - start_day
@@ -66,13 +58,13 @@ dates = pd.date_range("2020-03-03", periods=days+1, freq="D")
 dates = pd.Series(dates).astype(str)
 
 
-# In[5]:
+# In[6]:
 
 
 data = []
 for date in dates: 
     
-    url = "https://storage.googleapis.com/covid19chile/Chile/covid19_chile_{}.csv?h=h".format(date)
+    url = "https://storage.googleapis.com/covid19chile/Chile/covid19_chile_{}.csv?f=f".format(date)
     try:
         try:
             df = pd.read_csv(url, sep=";", encoding="utf-8")
@@ -80,14 +72,20 @@ for date in dates:
         except:
             df = pd.read_csv(url, sep=";", encoding="latin-1")
 
+        if "fallecidos_nuevos" not in list(df):
+            df["fallecidos_nuevos"] = 0
+        
+        if "fallecidos_totales" not in list(df):
+            df["fallecidos_totales"] = 0
+    
+
         df = df[df["region"]!="Total"]
         df["region_id"] = df["region"].replace(regions_id)
         df["region_pob"] = df["region"].replace(regions_pob).astype(int)  
         df["fecha"] = df["fecha"].str.replace("-", "/")
-        df = df.rename(columns={"casos_nuevos":"confirmados", "casos_totales":"casos_acum"})
+        df = df.rename(columns={"casos_nuevos":"confirmados", "casos_totales":"casos_acum", "fallecidos_totales":"fallecidos_acum"})
         df["total_cada_100mil"] = (df["casos_acum"]/df["region_pob"])*100000
         df = df.drop(columns={"casos_recuperados", "region_pob"})
-        df["fallecidos"] = 0
         df["recuperados"] = np.nan
 
         if date == "2020-03-03":
@@ -99,16 +97,6 @@ for date in dates:
         pass
 
 data = pd.concat(data, sort=False)
-
-
-# In[6]:
-
-
-data.tail()
-
-
-# In[8]:
-
 
 update = data.fecha.max()
 update = pd.to_datetime(update)
@@ -180,6 +168,12 @@ output1 = {
 import simplejson as json
 with open("dias_covid19.json", "w") as outfile:
     json.dump(output1, outfile, ignore_nan=True)
+
+
+# In[15]:
+
+
+data1[data1["region"]=="Metropolitana"]
 
 
 # In[ ]:
